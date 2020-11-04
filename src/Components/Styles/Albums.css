@@ -1,0 +1,13 @@
+.albums {
+    width: 60%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.album {
+    text-align: center;
+}
+.album > img {
+    width: 300px;
+    height: auto;
+}
