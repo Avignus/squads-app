@@ -1,26 +1,20 @@
 import api from '../Config/api';
+import { Redirect } from 'react-router-dom';
 
-const authenticate = async (params) => {
+const authenticate = (params) => {
+  let token = localStorage.getItem('token');
+  api.defaults.headers.common = { Authorization: `bearer ${token}` };
+
   api
     .post('/auth/authenticate', params)
     .then((response) => {
       const token = response.data.token;
       localStorage.setItem('token', token);
       api.defaults.headers.common = { Authorization: `Bearer ${token}` };
-      // setSigned(true);
-      console.log(response);
     })
     .catch((err) => {
       console.log(err);
     });
 };
 
-const constructData = (e, email, password) => {
-  e.preventDefault();
-  let data = {};
-  data.email = email;
-  data.password = password;
-  authenticate(data);
-};
-
-export default constructData;
+export default authenticate;

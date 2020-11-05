@@ -4,15 +4,21 @@ import '../Components/Styles/Login.css';
 import logo from '../Assets/logo.png';
 import FormRegistry from '../Components/FormRegistry';
 import FormLogin from '../Components/FormLogin';
-function Login() {
-  const [isSigned, setSigned] = useState(false);
+import { Redirect } from 'react-router-dom';
+function Login(props) {
   const [shouldRotate, setRotation] = useState('');
+  // const [token, setToken] = useState('');
+  const [signed, setSigned] = useState(false);
+  useEffect(() => {}, [signed]);
 
-  useEffect(() => {
-    if (isSigned) {
-      console.log('autenticado');
-    }
-  }, [isSigned, shouldRotate]);
+  const setToken = () => {
+    console.log('executou');
+    setSigned(true);
+  };
+
+  if (signed) {
+    return <Redirect push to={'/main'} />;
+  }
 
   return (
     <div className="wrapper">
@@ -20,10 +26,16 @@ function Login() {
       <div className={`flip-card${shouldRotate}`}>
         <div className="flip-card-inner">
           <div className="flip-card-front">
-            <FormLogin setRotation={() => setRotation('-rotate')} />
+            <FormLogin
+              setToken={(e) => setToken(e)}
+              setRotation={() => setRotation('-rotate')}
+            />
           </div>
           <div className="flip-card-back">
-            <FormRegistry setRotation={() => setRotation('-reverse')} />
+            <FormRegistry
+              setRegistry={(e) => setToken(e)}
+              setRotation={() => setRotation('-reverse')}
+            />
           </div>
         </div>
       </div>

@@ -1,0 +1,11 @@
+.container-artists {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  background: linear-gradient(#a800f6, #ef0017);
+  box-sizing: content-box;
+}
+
+.list-artists {
+  width: 100wh;
+}
